@@ -1,0 +1,94 @@
+﻿
+
+@using _2503.Models
+@using PagedList.Mvc;
+@model  PagedList.PagedList<_2503.Models.PRODUCT>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+<h2>DANH MỤC SẢN PHẨM</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "AddProduct", new { @class = "badge text-decoration-none text-white bg-primary" })
+</p>
+
+
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+            <div class="card flex-fill">
+                <div class="card-header">
+
+                    <h5 class="card-title mb-0">Latest Projects</h5>
+                </div>
+                <table class="table table-hover my-0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="d-none d-xl-table-cell">    Tên sản phẩm    </th>
+                            <th class="d-none d-xl-table-cell" style="text-align:center"> Giá bán   </th>
+                            <th class="d-none d-xl-table-cell" style="text-align:center"> Size    </th>
+                            <th class="d-none d-md-table-cell" style="text-align:center"> Hình ảnh </th>
+                            <th class="d-none d-md-table-cell" style="text-align:center"> Ngày cập nhật </th>
+                            <th class="d-none d-md-table-cell" style="text-align:center"> Số lượng </th>
+                            <th class="d-none d-md-table-cell" style="text-align:center"> Mặt hàng </th>
+                            <th>       </th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID_PRO)
+                                </td>
+                                <td class="d-none d-xl-table-cell">
+                                    @Html.DisplayFor(modelItem => item.NAME)
+                                </td>
+                                <td class="d-none d-xl-table-cell" style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.PRICE)
+                                </td>
+                                <td class="d-none d-xl-table-cell" style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.SIZE)
+                                </td>
+
+                                <td class="d-none d-md-table-cell" style="text-align:center">
+                                    <img src="@Url.Content("~/Content/images/product/" + item.IMAGE)" style="width:50px;height:50px;" />
+                                </td>
+                                <td class="d-none d-md-table-cell" style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.DATEUPDATE)
+                                </td>
+                                <td class="d-none d-md-table-cell" style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.QUANTITIES)
+                                </td>
+                                <td class="d-none d-md-table-cell" style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.CATEGORy.NAME)
+                                </td>
+                                <td class="d-none d-xl-table-cell">
+
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID_PRO }, new { @class = "badge bg-danger text-white text-decoration-none" })
+                                    
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID_PRO } , new { @class = "badge bg-success text-white text-decoration-none" }) 
+                                    
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID_PRO } , new { @class = "badge bg-warning text-white text-decoration-none" })
+
+                                </td>
+                            </tr>
+                        </tbody>   
+                    }
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount;
+<div class="menutrang">
+    @Html.PagedListPager(Model, page => Url.Action("SanPham", new { page = page }))
+</div>
+

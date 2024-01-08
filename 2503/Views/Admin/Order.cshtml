@@ -1,0 +1,149 @@
+﻿@*@model IEnumerable<_2503.Models.ORDER>*@
+
+@using _2503.Models
+@using PagedList.Mvc;
+@model  PagedList.PagedList<_2503.Models.ORDER>
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+
+
+
+
+@*<h2>Order</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PAYMENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STTSHIP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DATEORDER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DATESHIP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_CUS)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PAYMENT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STTSHIP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DATEORDER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DATESHIP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_CUS)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_ORD }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_ORD }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_ORD })
+            </td>
+        </tr>
+    }
+
+</table>*@
+
+
+
+
+
+
+<h2>    QUẢN LÝ ĐƠN HÀNG    </h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "AddProduct", new { @class = "badge text-decoration-none text-white bg-primary" })
+</p>
+
+
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+            <div class="card flex-fill">
+                <div class="card-header">
+
+                    <h5 class="card-title mb-0">Latest Projects</h5>
+                </div>
+                <table class="table table-hover my-0">
+                    <thead style="background-color:royalblue;color:aliceblue">
+                        <tr>
+                            <th> Mã HĐ  </th>
+                            <th class="d-none d-xl-table-cell">    Tổng tiền    </th>
+                            <th class="d-none d-xl-table-cell" style="text-align:center"> Trạng thái   </th>
+                            <th class="d-none d-xl-table-cell" style="text-align:center"> Ngày đặt    </th>
+                            <th class="d-none d-md-table-cell" style="text-align:center"> Ngày giao </th>
+                            <th class="d-none d-md-table-cell" style="text-align:center"> Mã khách </th>
+                            <th>       </th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody style="border:1px solid black">
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID_ORD)
+                                </td>
+                                <td class="d-none d-xl-table-cell">
+                                    @Html.DisplayFor(modelItem => item.PAYMENT)
+                                </td>
+                                <td class="d-none d-xl-table-cell" style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.STTSHIP)
+                                </td>
+                                <td class="d-none d-xl-table-cell" style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.DATEORDER)
+                                </td>
+                                <td class="d-none d-md-table-cell" style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.DATESHIP)
+                                </td>
+                                <td class="d-none d-md-table-cell" style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.ID_CUS)
+                                </td>
+                                
+                                <td class="d-none d-xl-table-cell">
+
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID_ORD }, new { @class = "badge bg-danger text-white text-decoration-none" })
+
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID_ORD }, new { @class = "badge bg-success text-white text-decoration-none" })
+
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID_ORD }, new { @class = "badge bg-warning text-white text-decoration-none" })
+
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    }
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount;
+<div class="menutrang">
+    @Html.PagedListPager(Model, page => Url.Action("SanPham", new { page = page }))
+</div>
+

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SQL_2503_Fashion" Class="dbSQL_2503DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=HARRY\SQLEXPRESS;Initial Catalog=SQL_2503_Fashion;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SQL_2503_FashionConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CUSTOMER" Member="CUSTOMERs">
+    <Type Name="CUSTOMER">
+      <Column Name="ID_CUS" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UN" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PW" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADDRESS" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="PHONENUMBER" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DATEOFBIRTH" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="CUSTOMER_ORDER" Member="ORDERs" ThisKey="ID_CUS" OtherKey="ID_CUS" Type="ORDER" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCT" Member="PRODUCTs">
+    <Type Name="PRODUCT">
+      <Column Name="ID_PRO" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="SIZE" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DESCRIPTION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IMAGE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DATEUPDATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="QUANTITIES" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_CAT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PRODUCT_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID_PRO" OtherKey="ID_PRO" Type="ORDER_DETAIL" />
+      <Association Name="CATEGORy_PRODUCT" Member="CATEGORy" ThisKey="ID_CAT" OtherKey="ID_CAT" Type="CATEGORy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDER_DETAIL" Member="ORDER_DETAILs">
+    <Type Name="ORDER_DETAIL">
+      <Column Name="ID_ORD" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_PRO" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QUANTITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UNITPRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="PRODUCT_ORDER_DETAIL" Member="PRODUCT" ThisKey="ID_PRO" OtherKey="ID_PRO" Type="PRODUCT" IsForeignKey="true" />
+      <Association Name="ORDER_ORDER_DETAIL" Member="ORDER" ThisKey="ID_ORD" OtherKey="ID_ORD" Type="ORDER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CATEGORIES" Member="CATEGORies">
+    <Type Name="CATEGORy">
+      <Column Name="ID_CAT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="CATEGORy_PRODUCT" Member="PRODUCTs" ThisKey="ID_CAT" OtherKey="ID_CAT" Type="PRODUCT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ADMIN" Member="ADMINs">
+    <Type Name="ADMIN">
+      <Column Name="UN" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PW" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDERS" Member="ORDERs">
+    <Type Name="ORDER">
+      <Column Name="ID_ORD" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PAYMENT" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="STTSHIP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DATEORDER" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DATESHIP" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ID_CUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ORDER_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID_ORD" OtherKey="ID_ORD" Type="ORDER_DETAIL" />
+      <Association Name="CUSTOMER_ORDER" Member="CUSTOMER" ThisKey="ID_CUS" OtherKey="ID_CUS" Type="CUSTOMER" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

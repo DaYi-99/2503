@@ -1,0 +1,74 @@
+﻿@model _2503.Models.CATEGORy
+
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+
+@*@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>CATEGORy</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}*@
+
+
+<div class="container-fluid p-0">
+    <div class="mb-3">
+        <h1 class="h3 d-inline align-middle">   Thêm mặt hàng   </h1>
+        <a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
+            Get more form examples
+        </a>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            Tên mặt hàng
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <input type="text" class="form-control" placeholder="Nhập tên mặt hàng" name="NAME">
+                        @ViewData["Err"]
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="LƯU" class="btn btn-default" />
+            </div>
+        </div>
+
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

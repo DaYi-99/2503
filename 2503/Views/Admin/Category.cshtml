@@ -1,0 +1,99 @@
+﻿@model IEnumerable<_2503.Models.CATEGORy>
+
+@*@using _2503.Models
+@using PagedList.Mvc;
+@model  PagedList.PagedList<_2503.Models.CATEGORy>*@
+
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+<h2>    Mặt hàng    </h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "AddCategory")
+</p>
+@*<table class="table">
+        <tr>
+            <th>
+                Mã mặt hàng
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NAME)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_CAT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAME)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID_CAT }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID_CAT }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID_CAT })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-12 col-lg-12 col-xxl-9 d-flex">
+            <div class="card flex-fill">
+                <div class="card-header">
+
+                    <h5 class="card-title mb-0">Latest Projects</h5>
+                </div>
+                <table class="table table-hover my-0">
+                    <thead>
+                        <tr>
+                            <th> Mã mặt hàng </th>
+                            <th class="d-none d-xl-table-cell"> Tên mặt hàng    </th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID_CAT)
+                                </td>
+                                <td class="d-none d-xl-table-cell">
+                                    @Html.DisplayFor(modelItem => item.NAME)
+                                </td>
+                                <td>
+                                    
+                                    <a href="#" style="text-decoration:none; color:white;">
+                                        <span class="badge bg-danger">
+                                            Edit
+                                        </span>
+                                    </a>
+                                    <a href="#" style="text-decoration:none; color:white;">
+                                        <span class="badge bg-success">
+                                            Details
+                                        </span>
+                                    </a>
+                                    <a href="#" style="text-decoration:none; color:white;">
+                                        <span class="badge bg-warning">
+                                            Delete
+                                        </span>
+                                    </a>
+                                     
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
